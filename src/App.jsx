@@ -6,12 +6,14 @@ import { faFacebook, faTwitterSquare, faInstagramSquare, faLinkedin } from '@for
 import Project1 from './pages/Project1';
 import Project2 from './pages/Project2';
 import Project3 from './pages/Project3';
-import './Portfolio.css';
+import './styles/Portfolio.css';
 import logo from './assets/images/1708409271184.png';
 import aboutImage from './assets/images/IMG_20230906_132227 (1).png';
 import project1 from './assets/images/project1.jpg';
 import project2 from './assets/images/project2.jpg';
 import project3 from './assets/images/project3.jpg';
+import ScrollToTop from './components/ScrollToTop';
+import Navbar from './components/Navbar';
 
 const App = () => {
   const [activeTab, setActiveTab] = useState('skills');
@@ -22,6 +24,8 @@ const App = () => {
 
   return (
     <Router>
+      <ScrollToTop />
+      <Navbar />
       <Routes>
         <Route path="/project1" element={<Project1 />} />
         <Route path="/project2" element={<Project2 />} />
@@ -171,6 +175,12 @@ const App = () => {
                       </div>
                     </div>
                   </div>
+                  <a
+                    href="https://drive.google.com/drive/u/2/folders/1WDNnB4EkQ_xZGUBaVyfYpHF1dkFZ2t2X"
+                    className="btn"
+                  >
+                    See more
+                  </a>
                 </div>
               </div>
 

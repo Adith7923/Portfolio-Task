@@ -20,7 +20,7 @@ body {
 #header {
   width: 100%;
   height: 100vh;
-  background-image: url(assets/images/PhotoRoom-20240220_114246.png);
+  background-image: url(../assets/images/PhotoRoom-20240220_114246.png);
   background-size: cover;
   background-position: center;
   padding-top: 60px;

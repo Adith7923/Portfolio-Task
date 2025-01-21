@@ -20,14 +20,15 @@ body {
     flex-direction: column;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .project-details h1 {
     font-size: 50px;
   color: #68a098;
+  margin-top: 100px;
   margin-bottom: 20px;
   text-align: center;
+  
 }
 
 .project-details img.project-image {
@@ -82,7 +83,11 @@ body {
   color: #ffffff;
   font-weight: bold;
 }
-
+.ImgDet{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 /* Responsive Styles */
 @media (max-width: 768px) {
   .project-details {
