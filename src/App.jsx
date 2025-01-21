@@ -115,7 +115,7 @@ const App = () => {
           <h1 className="sub-title">My Projects</h1>
           <div className="projects-list">
             <div className="work">
-              <img src="assets/images/IMG_20240220_115448.jpg" alt="Light Follower Robot" />
+              <img src="./assets/images/IMG_20240220_115448.jpg" alt="Light Follower Robot" />
               <div className="layer">
                 <h3>Light Follower Robot</h3>
                 <p>This robot follows the direction of light</p>
@@ -125,7 +125,7 @@ const App = () => {
               </div>
             </div>
             <div className="work">
-              <img src="assets/images/photo_2024-02-20_13-47-23.jpg" alt="Traffic Sign Detector" />
+              <img src="./assets/images/photo_2024-02-20_13-47-23.jpg" alt="Traffic Sign Detector" />
               <div className="layer">
                 <h3>Traffic Sign Detector</h3>
                 <p>A traffic sign detection system using CNN and Keras in Python</p>
