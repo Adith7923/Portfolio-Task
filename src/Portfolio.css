@@ -1,4 +1,4 @@
-/* Import the Poppins font from Google Fonts */
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 * {
@@ -13,8 +13,8 @@ html {
 }
 
 body {
-  background: #fff;
   color: #080808;
+  font-size: larger;
 }
 
 #header {
@@ -23,7 +23,7 @@ body {
   background-image: url(assets/images/PhotoRoom-20240220_114246.png);
   background-size: cover;
   background-position: center;
-  padding-top: 60px; /* Adjust this value based on the height of your navbar */
+  padding-top: 60px;
 }
 
 .container {
@@ -39,8 +39,8 @@ nav {
   top: 0;
   left: 0;
   width: 100%;
-  background-image: linear-gradient(to left , #68a098,#fff); /* Adjust the background color as needed */
-  z-index: 1000; /* Ensure it stays on top of other elements */
+  background-image: linear-gradient(to left , #68a098,#fff); 
+  z-index: 1000; 
 }
 
 .logo {
@@ -54,17 +54,18 @@ nav ul li {
 }
 
 nav ul li a {
-  color: #080808;
+  color: #fff;
   text-decoration: none;
   font-size: 18px;
   position: relative;
+  font-weight: 700;
 }
 
 nav ul li a::after {
   content: '';
   width: 0%;
   height: 3px;
-  background: #68a098;
+  background: #ffffff;
   position : absolute;
   left : 0;
   bottom : -6px;
@@ -244,10 +245,12 @@ nav ul li a:hover:after {
   border-radius: 6px;
   text-decoration: none;
   color: #080808;
+  transition: all 0.5s;
 }
 
 .btn:hover {
   background: #68a098;
+  color: #fff;
 }
 
 .contact-left {
@@ -331,4 +334,21 @@ form .btn2 {
   color: #68a098;
   margin-top: -40px;
   display: block;
+}
+.Email-link {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.tab-contents {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  transform: translateX(-100%);
+}
+
+.tab-contents.active-tab {
+  display: block;
+  opacity: 1;
+  transform: translateX(0);
 }
