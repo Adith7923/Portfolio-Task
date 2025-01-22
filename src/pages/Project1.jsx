@@ -1,11 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet'; // Import Helmet
 import projectImage from '../assets/images/project1.jpg';
 import './ProjectDetails.css';
 
 const Project1 = () => {
   return (
     <div className="project-details">
+      <Helmet>
+        <title>Light Follower Robot | My Projects</title> {/* Update the title */}
+      </Helmet>
       <h1>Light Follower Robot</h1>
       <div className='ImgDet'>
         <img src={projectImage} alt="Light Follower Robot" className="project-image" />

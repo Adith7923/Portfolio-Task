@@ -2,16 +2,20 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faPhone, faUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
-import { faFacebook, faTwitterSquare, faInstagramSquare, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { faFacebook, faTwitterSquare, faInstagramSquare, faLinkedin , faGithub} from '@fortawesome/free-brands-svg-icons';
 import Project1 from './pages/Project1';
 import Project2 from './pages/Project2';
 import Project3 from './pages/Project3';
+import Project4 from './pages/Project4'; // Import Project4
 import './styles/Portfolio.css';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 import logo from './assets/images/1708409271184.png';
 import aboutImage from './assets/images/IMG_20230906_132227 (1).png';
 import project1 from './assets/images/project1.jpg';
 import project2 from './assets/images/project2.jpg';
 import project3 from './assets/images/project3.jpg';
+import project4 from './assets/images/project4.jpg'; // Import Project4 image
 import ScrollToTop from './components/ScrollToTop';
 import Navbar from './components/Navbar';
 
@@ -30,6 +34,7 @@ const App = () => {
         <Route path="/project1" element={<Project1 />} />
         <Route path="/project2" element={<Project2 />} />
         <Route path="/project3" element={<Project3 />} />
+        <Route path="/project4" element={<Project4 />} /> 
         <Route
           path="/"
           element={
@@ -55,7 +60,6 @@ const App = () => {
                 </div>
               </div>
 
-              
               <div id="about">
                 <div className="container">
                   <div className="row">
@@ -65,11 +69,7 @@ const App = () => {
                     <div className="about-col-2">
                       <h1 className="sub-title">About me</h1>
                       <p>
-                        Enthusiastic Electronics and Communication Engineering student
-                        pursuing challenging opportunities, driven by an unyielding passion
-                        for pioneering technologies. Aspiring to infuse innovation into
-                        dynamic work environments and make a lasting impact with a solid
-                        theoretical foundation.
+Passionate Software Developer with a strong foundation in coding and problem-solving. Focused on creating innovative solutions and pushing the boundaries of technology. Eager to contribute to dynamic environments, constantly learning, and applying new skills to solve complex challenges.
                       </p>
                       <div className="tab-titles">
                         <p className={`tab-links ${activeTab === 'skills' ? 'active-link' : ''}`} onClick={() => opentab('skills')}>Skills</p>
@@ -81,7 +81,7 @@ const App = () => {
                           <li>
                             <span>Programming Languages</span>
                             <br />
-                            Proficient in Python
+                            Python , HTML , CSS , JavaScript , C , Java
                           </li>
                           <li>
                             <span>Video editing</span>
@@ -139,7 +139,6 @@ const App = () => {
                 </div>
               </div>
 
-            
               <div id="services">
                 <div className="container">
                   <h1 className="sub-title">My Projects</h1>
@@ -174,6 +173,16 @@ const App = () => {
                         </Link>
                       </div>
                     </div>
+                    <div className="work">
+                      <img src={project4} alt="Project 4" className='projImage'/>
+                      <div className="layer">
+                        <h3>FPGA Based GMSK Modulator and Demodulator</h3>
+                        <p>The FPGA-Based GMSK Modulator and Demodulator project implements Gaussian Minimum Shift Keying modulation and demodulation using FPGA technology</p>
+                        <Link to="/project4">
+                          <FontAwesomeIcon icon={faUpRightFromSquare} />
+                        </Link>
+                      </div>
+                    </div>
                   </div>
                   <a
                     href="https://drive.google.com/drive/u/2/folders/1WDNnB4EkQ_xZGUBaVyfYpHF1dkFZ2t2X"
@@ -184,7 +193,6 @@ const App = () => {
                 </div>
               </div>
 
-             
               <div id="contact">
                 <div className="container">
                   <div className="row">
@@ -197,16 +205,28 @@ const App = () => {
                         <a href="https://twitter.com/AdithTM1"><FontAwesomeIcon icon={faTwitterSquare} /></a>
                         <a href="https://www.instagram.com/adith.t.m/"><FontAwesomeIcon icon={faInstagramSquare} /></a>
                         <a href="https://www.linkedin.com/in/adith-t-m/"><FontAwesomeIcon icon={faLinkedin} /></a>
+                        <a href="https://github.com/Adith7923"><FontAwesomeIcon icon={faGithub} /></a>
                       </div>
-                      <a href="assets/images/Adith_Resume (2).pdf" download="" className="btn btn2">Download CV</a>
+                      <a href="https://drive.google.com/file/d/1Soo6SMpwTqdFnX8SChV9ZqmLXnCwB6q8/view?usp=sharing" download="" className="btn btn2">Download CV</a>
                     </div>
                     <div className="contact-right">
-                      <form name="submit-to-google-sheet">
-                        <input type="text" name="Name" placeholder="Your Name" required />
-                        <input type="email" name="Email" placeholder="Your Email" required />
-                        <textarea name="Message" rows={6} placeholder="Your Message"></textarea>
-                        <button type="submit" className="btn btn2">Submit</button>
-                      </form>
+                      <Form>
+                        <Form.Group controlId="formName" className="mb-3">
+                          <Form.Label>Your Name</Form.Label>
+                          <Form.Control type="text" placeholder="Your Name" required />
+                        </Form.Group>
+                        <Form.Group controlId="formEmail" className="mb-3">
+                          <Form.Label>Your Email</Form.Label>
+                          <Form.Control type="email" placeholder="Your Email" required />
+                        </Form.Group>
+                        <Form.Group controlId="formMessage" className="mb-3">
+                          <Form.Label>Your Message</Form.Label>
+                          <Form.Control as="textarea" rows={6} placeholder="Your Message" />
+                        </Form.Group>
+                        <Button type="submit" className="btn btn2">
+                          Submit
+                        </Button>
+                      </Form>
                       <span id="msg" />
                     </div>
                   </div>

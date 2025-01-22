@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 * {
@@ -39,8 +38,8 @@ nav {
   top: 0;
   left: 0;
   width: 100%;
-  background-image: linear-gradient(to left , #68a098,#fff); 
-  z-index: 1000; 
+  background-image: linear-gradient(to left, #68a098, #fff);
+  z-index: 1000;
 }
 
 .logo {
@@ -66,9 +65,9 @@ nav ul li a::after {
   width: 0%;
   height: 3px;
   background: #ffffff;
-  position : absolute;
-  left : 0;
-  bottom : -6px;
+  position: absolute;
+  left: 0;
+  bottom: -6px;
   transition: 0.5s;
 }
 
@@ -87,7 +86,7 @@ nav ul li a:hover:after {
 }
 
 .header-text h1 span {
-  color:#68a098;
+  color: #68a098;
 }
 
 #about {
@@ -160,10 +159,15 @@ nav ul li a:hover:after {
 
 .tab-contents {
   display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  transform: translateX(-100%);
 }
 
 .tab-contents.active-tab {
   display: block;
+  opacity: 1;
+  transform: translateX(0);
 }
 
 #services {
@@ -185,15 +189,24 @@ nav ul li a:hover:after {
 
 .work img {
   width: 100%;
+  height: 600px; 
+  object-fit: cover; 
   border-radius: 10px;
   display: block;
-  transition: transform 0.5s;
+  transition: transform 0.5s, box-shadow 0.3s ease-in-out; 
+  box-shadow: 5px 10px;
 }
+
+.work:hover img {
+  transform: scale(1.1);
+  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.4); 
+}
+
 
 .layer {
   width: 100%;
   height: 0;
-  background: linear-gradient(rgba(0,0,0,0.6),#68a098);
+  background: linear-gradient(rgba(0, 0, 0, 0.6), #68a098);
   border-radius: 10px;
   position: absolute;
   color: #fff;
@@ -206,7 +219,7 @@ nav ul li a:hover:after {
   flex-direction: column;
   padding: 0 40px;
   text-align: center;
-  font-size: 14px;
+  font-size: 18px;
   transition: height 0.5s;
 }
 
@@ -224,13 +237,11 @@ nav ul li a:hover:after {
 }
 
 .layer h3 {
-  font-weight: 50px;
+  font-weight: 500;
   margin-bottom: 20px;
 }
 
-.work:hover img {
-  transform: scale(1.1);
-}
+
 
 .work:hover .layer {
   height: 100%;
@@ -266,7 +277,7 @@ nav ul li a:hover:after {
 }
 
 .contact-left p i {
-  color:#68a098;
+  color: #68a098;
   margin-right: 15px;
   font-size: 25px;
 }
@@ -335,20 +346,8 @@ form .btn2 {
   margin-top: -40px;
   display: block;
 }
+
 .Email-link {
   color: #ffffff;
   text-decoration: none;
-}
-
-.tab-contents {
-  display: none;
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-  transform: translateX(-100%);
-}
-
-.tab-contents.active-tab {
-  display: block;
-  opacity: 1;
-  transform: translateX(0);
 }
