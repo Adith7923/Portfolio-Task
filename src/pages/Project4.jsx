@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet'; // Import Helmet
+import { Helmet } from 'react-helmet'; 
 import projectImage from '../assets/images/project4.jpg';
 import './ProjectDetails.css';
 
@@ -8,7 +8,7 @@ const Project4 = () => {
   return (
     <div className="project-details">
       <Helmet>
-        <title>FPGA Based GMSK Modulator and Demodulator | My Projects</title> {/* Update the title */}
+        <title>FPGA Based GMSK Modulator and Demodulator | My Projects</title>
       </Helmet>
       <h1>FPGA Based GMSK Modulator and Demodulator</h1>
       <div className='ImgDet'>
