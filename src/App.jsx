@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faBook,
+  faBriefcase,
   faEnvelope,
+  faGraduationCap,
   faPhone,
+  faSchool,
   faUpRightFromSquare,
 } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -37,13 +41,10 @@ import {
   faJava,
 } from "@fortawesome/free-brands-svg-icons";
 import { faMicrochip, faVideo } from "@fortawesome/free-solid-svg-icons";
-import SplitText from "./blocks/TextAnimations/SplitText/SplitText";
 import axios from "axios";
+import DecryptedText from "./blocks/TextAnimations/DecryptedText/DecryptedText";
 import { Player } from '@lottiefiles/react-lottie-player';
-const handleAnimationComplete = () => {
-  console.log("All letters have animated!");
-};
-
+import Header from "./components/Header";
 const App = () => {
   const [activeTab, setActiveTab] = useState("skills");
   const [formData, setFormData] = useState({
@@ -121,23 +122,15 @@ const App = () => {
     if (Object.keys(errors).length === 0) {
       console.log("Form Data Submitted:", formData);
       setFormSuccess(
-        <SplitText
-        text="Adith T M"
-        className="text-2xl font-semibold text-center"
-        delay={150}
-        animationFrom={{
-          opacity: 0,
-          transform: "translate3d(0,50px,0)",
-        }}
-        animationTo={{
-          opacity: 1,
-          transform: "translate3d(0,0,0)",
-        }}
-        easing="easeOutCubic"
-        threshold={0.2}
-        rootMargin="-50px"
-        onLetterAnimationComplete={handleAnimationComplete}
-      />
+        <DecryptedText
+text="Thank you! I will reach out to you soon."
+speed={100}
+maxIterations={20}
+characters="ABCD1234!?"
+className="revealed"
+parentClassName="all-letters"
+encryptedClassName="encrypted"
+/>
       );
       setFormData({ name: "", email: "", message: "" });
       setFormErrors({});
@@ -156,6 +149,7 @@ const App = () => {
       <ScrollToTop />
       <Navbar />
       <Routes>
+        
         <Route path="/project1" element={<Project1 />} />
         <Route path="/project2" element={<Project2 />} />
         <Route path="/project3" element={<Project3 />} />
@@ -165,53 +159,7 @@ const App = () => {
           element={
             <div>
               {/* Header Section */}
-              <div id="header">
-                <div className="container">
-                  <nav>
-                    <img src={logo} className="logo" alt="Logo" />
-                    <ul>
-                      <li>
-                        <a href="#header">Home</a>
-                      </li>
-                      <li>
-                        <a href="#about">About</a>
-                      </li>
-                      <li>
-                        <a href="#services">Projects</a>
-                      </li>
-                      <li>
-                        <a href="#contact">Contact me</a>
-                      </li>
-                    </ul>
-                  </nav>
-                  <div className="header-text">
-                    <p>Software Developer</p>
-                    <h1>
-                      Hi, I'm{" "}
-                      <span>
-                        <SplitText
-                          text="Adith T M"
-                          className="text-2xl font-semibold text-center"
-                          delay={150}
-                          animationFrom={{
-                            opacity: 0,
-                            transform: "translate3d(0,50px,0)",
-                          }}
-                          animationTo={{
-                            opacity: 1,
-                            transform: "translate3d(0,0,0)",
-                          }}
-                          easing="easeOutCubic"
-                          threshold={0.2}
-                          rootMargin="-50px"
-                          onLetterAnimationComplete={handleAnimationComplete}
-                        />
-                      </span>
-                      <br /> from Kerala, India
-                    </h1>
-                  </div>
-                </div>
-              </div>
+              <Header />
 
               {/* About Section */}
               <div id="about">
@@ -222,7 +170,7 @@ const App = () => {
                     </div>
                     <div className="about-col-2">
                       <h1 className="sub-title">About me</h1>
-                      <p>
+                      <p className="about-text">
                         Passionate Software Developer with a strong foundation
                         in coding and problem-solving. Focused on creating
                         innovative solutions and pushing the boundaries of
@@ -332,18 +280,33 @@ const App = () => {
                         <ul>
                           <li>
                             <span>
-                              Project Intern (November 2023 - February 2024)
+                            <FontAwesomeIcon
+                              icon={faBriefcase}
+                              className="exp-icon"
+                            />
+                            Project Intern (November 2023 - February 2024)
                             </span>
                             <br />
-                            Vikram Sarabhai Space Centre
-                          </li>
-                          <li>
-                            <span>Intern (June 2023 - July 2023)</span>
                             <br />
                             Vikram Sarabhai Space Centre
                           </li>
                           <li>
+                            <FontAwesomeIcon
+                              icon={faBriefcase}
+                              className="exp-icon"
+                            />
+                            <span>Intern (June 2023 - July 2023)</span>
+                            <br />
+                            <br />
+                            Vikram Sarabhai Space Centre
+                          </li>
+                          <li>
+                          <FontAwesomeIcon
+                              icon={faVideo}
+                              className="skill-icon"
+                            />
                             <span>Video Editor (2022-23)</span>
+                            <br />
                             <br />
                             IEEE ComSoc Kerala Chapter
                           </li>
@@ -357,9 +320,14 @@ const App = () => {
                       >
                         <ul>
                           <li>
+                          <FontAwesomeIcon
+                              icon={faGraduationCap}
+                              className="exp-icon"
+                            />
                             <span>
                               NSS College of Engineering Palakkad (2020-2024)
                             </span>
+                            <br />
                             <br />
                             B.Tech. in Electronics and Communication Engineering
                             <br />
@@ -367,12 +335,22 @@ const App = () => {
                             Dept.)
                           </li>
                           <li>
+                          <FontAwesomeIcon
+                              icon={faSchool}
+                              className="exp-icon"
+                            />
                             <span>MNKMHSS PULAPATTA (2018-2020)</span>
+                            <br />
                             <br />
                             Higher Secondary - Biology Science
                           </li>
                           <li>
+                          <FontAwesomeIcon
+                              icon={faBook}
+                              className="exp-icon"
+                            />
                             <span>H S KATAMPAZHIPURAM (2018)</span>
+                            <br />
                             <br />
                             Matriculation
                           </li>
@@ -414,7 +392,7 @@ const App = () => {
                     <div className="work">
                       <img
                         src={project3}
-                        alt="Vehicular Pollution Monitoring System"
+                        center    alt="Vehicular Pollution Monitoring System"
                       />
                       <div className="layer">
                         <h3>Vehicular Pollution Monitoring System</h3>
@@ -457,9 +435,20 @@ const App = () => {
                     <div className="contact-left">
                       <h1 className="sub-title">Contact Me</h1>
                       <p>
-                        <FontAwesomeIcon icon={faEnvelope} />{" "}
-                        adith7923@gmail.com
-                      </p>
+  <a
+    href="mailto:adith7923@gmail.com"
+    style={{
+      textDecoration: "none",
+      color: "inherit",
+      transition: "color 0.3s ease",
+    }}
+    onMouseEnter={(e) => (e.target.style.color = "#68a098")}
+    onMouseLeave={(e) => (e.target.style.color = "inherit")}
+  >
+   <span><FontAwesomeIcon icon={faEnvelope} /> </span> adith7923@gmail.com
+  </a>
+</p>
+
                       <p>
                         <FontAwesomeIcon icon={faPhone} /> 9947397099
                       </p>
@@ -555,13 +544,17 @@ const App = () => {
                         </Form.Group>
 
                         <Button variant="primary" type="submit" className="send-button">
-  <Player
-    autoplay
-    loop
-    src="/animations/Animation.json"
-    style={{ height: '50px', width: '80px' }} // Increased size
-  />
+  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <Player
+      autoplay
+      loop
+      src="/animations/Animation.json"
+      style={{ height: '30px', width: '80px' }}
+    />
+    <span>Connect with me!</span>
+  </div>
 </Button>
+
 
                       </Form>
                       {formSuccess && (
@@ -571,7 +564,7 @@ const App = () => {
                   </div>
                 </div>
                 <div className="copyright">
-                  <p>Copyright © Adith.</p>
+                  <p>Copyright 2025© Adith.</p>
                 </div>
               </div>
             </div>

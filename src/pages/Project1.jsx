@@ -7,6 +7,7 @@ import './ProjectDetails.css';
 
 
 const Project1 = () => {
+ 
   return (
     <div className="project-details">
       <Helmet>
@@ -25,24 +26,37 @@ const Project1 = () => {
           This project is a great example of how sensors and microcontrollers can be used together to create intelligent systems.
         </p>
       </div>
-      <h3>Project Objectives</h3>
+      
+      <div className="desc">
+      
+     
+<ul>
+   
+<h3>Project Objectives</h3>
+  <li>Design and build a robot that can follow a light source.</li>
+  <li>Implement light sensors to detect the direction of the light.</li>
+  <li>Program the robot to move towards the light source.</li>
+  <li>Ensure the robot can avoid obstacles while navigating toward the light.</li>
+</ul>
+
+      
       <ul>
-        <li>Design and build a robot that can follow a light source.</li>
-        <li>Implement light sensors to detect the direction of the light.</li>
-        <li>Program the robot to move towards the light source.</li>
-      </ul>
       <h3>Technologies Used</h3>
-      <ul>
         <li>Arduino for controlling the robot.</li>
         <li>Light sensors for detecting light intensity.</li>
         <li>DC motors for robot movement.</li>
         <li>Programming in C/C++ for Arduino.</li>
       </ul>
-      <h3>Project Report</h3>
+
+      </div>
+      <div className="report">
+     
       <p>
+      <h3>Project Report</h3>
         For a detailed explanation of the project, including the circuit diagram, code, and results, 
         please refer to the project report linked below.
       </p>
+      </div>
       <a href="https://drive.google.com/file/d/1w-YYWOrlXX7U6cIJQFxKl_8yCM5V5kfb/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="btn btn2">
         View Project Report
       </a>

@@ -22,24 +22,31 @@ const Project2 = () => {
           This project showcases the power of deep learning in image recognition tasks.
         </p>
       </div>
-      <h3>Project Objectives</h3>
+      <div className="desc">
+     
       <ul>
+      <h3>Project Objectives</h3>
         <li>Develop a system to detect and recognize traffic signs.</li>
         <li>Implement a CNN model using Keras in Python.</li>
         <li>Train the model on a dataset of traffic signs.</li>
       </ul>
-      <h3>Technologies Used</h3>
+     
       <ul>
+      <h3>Technologies Used</h3>
         <li>Python for programming.</li>
         <li>Keras for building the CNN model.</li>
         <li>OpenCV for image processing.</li>
         <li>Jupyter Notebook for development and testing.</li>
       </ul>
-      <h3>Project Report</h3>
+      </div>
+      <div className="report">
+      
       <p>
+      <h3>Project Report</h3>
         For a detailed explanation of the project, including the model architecture, code, and results, 
         please refer to the project report linked below.
       </p>
+      </div>
       <a href="https://drive.google.com/file/d/1kO-BGZYkvf3_IoSGMifWzBo0U6SzwiZz/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="btn btn2">
         View Project Report
       </a>

@@ -22,24 +22,31 @@ const Project3 = () => {
           This project highlights the importance of monitoring vehicular emissions to reduce air pollution and improve environmental health.
         </p>
       </div>
-      <h3>Project Objectives</h3>
+      <div className="desc">
+      
       <ul>
+      <h3>Project Objectives</h3>
         <li>Develop a system to monitor pollution levels emitted by vehicles.</li>
         <li>Implement sensors to measure various pollutants.</li>
         <li>Transmit the data to a central server for analysis.</li>
       </ul>
-      <h3>Technologies Used</h3>
+     
       <ul>
+      <h3>Technologies Used</h3>
         <li>Arduino for controlling the sensors.</li>
         <li>Various sensors for measuring pollutants (e.g., CO2, NOx).</li>
         <li>Wi-Fi module for data transmission.</li>
         <li>Programming in C/C++ for Arduino.</li>
       </ul>
-      <h3>Project Report</h3>
+      </div>
+      <div className="report">
+      
       <p>
+      <h3>Project Report</h3>
         For a detailed explanation of the project, including the circuit diagram, code, and results, 
         please refer to the project report linked below.
       </p>
+      </div>
       <a href="https://drive.google.com/file/d/14L72msoS91RycjFBiwOY53U3T9fgGLgH/view?usp=drive_link" target="_blank" rel="noopener noreferrer" className="btn btn2">
         View Project Report
       </a>

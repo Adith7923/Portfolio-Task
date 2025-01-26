@@ -23,7 +23,7 @@ body {
 .project-details h1 {
   font-size: 50px;
   color: #68a098;
-  margin-top: 100px;
+  margin-top: 150px;
   margin-bottom: 20px;
   text-align: center;
 }
@@ -47,6 +47,7 @@ body {
   font-size: 24px;
   color: #ffffff;
   margin-bottom: 10px;
+  text-align: justify;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
@@ -54,6 +55,7 @@ body {
   list-style: disc;
   padding-left: 20px;
   margin-bottom: 20px;
+  text-align: justify;
 }
 
 .project-details ul li {
@@ -100,6 +102,23 @@ body {
   overflow: hidden;
 }
 
+.desc{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 150px;
+  text-align: center;
+  margin: auto;
+  
+}
+
+.report{
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;  
+  text-align: justify;
+}
+
 .paper-plane {
   width: 24px;
   height: 24px;
@@ -119,36 +138,66 @@ body {
   fill: #ffffff;
 }
 
+
 @media (max-width: 768px) {
   .ImgDet {
     flex-direction: column; 
-    align-items: flex-start; 
+    align-items: center; 
   }
-
 
   .project-details {
     padding: 10px;
+    text-align: justify;
   }
-
-  .project-details h2 {
-    font-size: 24px;
-  }
-
-  .project-details p {
-    font-size: 16px;
+.project-details p{
+  width: 400px;
+}
+  .project-details h1 {
+    font-size: 36px; /* Reduce h1 font size */
+    margin-top: 150px; /* Adjust spacing for smaller screens */
+    margin-bottom: 15px;
+    text-align: center;
   }
 
   .project-details h3 {
-    font-size: 20px;
+    font-size: 20px; /* Adjust h3 font size */
+    text-align: center; /* Center-align h3 */
+  }
+
+  .project-details p {
+    font-size: 16px; /* Adjust paragraph font size */
+  }
+
+  .project-details ul {
+    padding-left: 10px; /* Adjust list indentation */
   }
 
   .project-details ul li {
-    font-size: 16px;
+    font-size: 16px; /* Adjust list item font size */
   }
 
   .project-details img.project-image {
-    display: flex;
-    width: 80%;
-    margin: 20px 0;
+    width: 80%; /* Ensure image scales appropriately */
+    margin: 20px 0; /* Add consistent spacing */
+    display: block; /* Center image */
+  }
+
+  .desc {
+    flex-direction: column; 
+    text-align: center; 
+    gap: 20px;
+    width: 400px; /* Reduce gap between elements */
+  }
+
+  .report {
+    margin-top: 10px;
+    margin: 0 auto; /* Center-align report div */
+    text-align: center; 
+    width: 400px;
+  }
+
+  .project-details a.btn {
+    font-size: 14px; /* Smaller button font size */
+    padding: 8px 16px; /* Adjust button padding */
   }
 }

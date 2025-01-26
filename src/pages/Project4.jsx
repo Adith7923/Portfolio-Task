@@ -23,23 +23,30 @@ const Project4 = () => {
           This project highlights the importance of FPGAs in implementing high-speed and efficient communication systems.
         </p>
       </div>
-      <h3>Project Objectives</h3>
+      <div className="desc">
+      
       <ul>
+      <h3>Project Objectives</h3>
         <li>Design and implement a GMSK modulator and demodulator using FPGA.</li>
         <li>Apply digital signal processing techniques for modulation and demodulation.</li>
         <li>Demonstrate the functionality of the communication system.</li>
       </ul>
-      <h3>Technologies Used</h3>
       <ul>
+
+      <h3>Technologies Used</h3>
         <li>FPGA for implementing the modulator and demodulator.</li>
         <li>VHDL/Verilog for FPGA programming.</li>
         <li>Digital signal processing techniques.</li>
       </ul>
-      <h3>Project Report</h3>
+      </div>
+      <div className="report">
+      
       <p>
+      <h3>Project Report</h3>
         For a detailed explanation of the project, including the design, implementation, and results, 
         please refer to the project report linked below.
       </p>
+      </div>
       <a href="https://drive.google.com/file/d/1Sno25iUlKvftawCK7F6MwExVJUqP9sBd/view?usp=drive_link" target="_blank" rel="noopener noreferrer" className="btn btn2">
         View Project Report
       </a>
