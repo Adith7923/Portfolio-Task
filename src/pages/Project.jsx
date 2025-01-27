@@ -1,45 +1,77 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import './ProjectDetails.css';
+import ScrollToTop from '../components/ScrollToTop';
 
 const ProjectDetails = () => {
-  const [projects, setProjects] = useState([]);
+  const { id } = useParams(); // Retrieve the project ID from the route
+  const [project, setProject] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [isAnimated, setIsAnimated] = useState(false); // For animation
 
   useEffect(() => {
-    // Fetch data from the backend
-    const fetchProjects = async () => {
+    const fetchProject = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/projects');
+        const response = await fetch(`http://localhost:8080/api/projects/id/${id}`);
+        if (!response.ok) {
+          throw new Error(`Project not found (status: ${response.status})`);
+        }
         const data = await response.json();
-        setProjects(data);
-        setIsLoading(false);
-      } catch (error) {
-        console.error('Error fetching projects:', error);
+        setProject(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
         setIsLoading(false);
       }
     };
 
-    fetchProjects();
-  }, []);
+    fetchProject();
+  }, [id]);
+
+  useEffect(() => {
+    if (!isLoading) {
+      setIsAnimated(true); // Trigger the animation after the data is loaded
+    }
+  }, [isLoading]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className="loading">Loading...</div>;
+  }
+
+  if (error) {
+    return (
+      <div className="error">
+        <h1>Error</h1>
+        <p>{error}</p>
+        <Link to="/" className="btn btn2">Back to Home</Link>
+      </div>
+    );
+  }
+
+  if (!project) {
+    return (
+      <div className="error">
+        <h1>Project Not Found</h1>
+        <Link to="/" className="btn btn2">Back to Home</Link>
+      </div>
+    );
   }
 
   return (
-    <div className="project-details">
-      <Helmet>
-        <title>My Projects</title>
-      </Helmet>
-      {projects.map((project) => (
-        <div className="project-item" key={project.id}>
+    <div className={`project-details-wrapper ${isAnimated ? 'slide-up' : ''}`}>
+      <div className="project-details">
+        <Helmet>
+          <title>{project.title} - Project Details</title>
+        </Helmet>
+        <ScrollToTop />
+        <div className="project-item">
           <h1>{project.title}</h1>
           <div className="ImgDet">
             <img
-              src={`data:image/jpeg;base64,${project.image}`} // Decode base64 image
-              alt={project.title}
+              src={`data:image/jpeg;base64,${project.image}`}
+              alt={`Image of ${project.title}`}
               className="project-image"
             />
             <p>{project.description}</p>
@@ -59,23 +91,24 @@ const ProjectDetails = () => {
             </ul>
           </div>
           <div className="report">
-            <h3>Project Report</h3>
             <p>
-              For a detailed explanation of the project, including the circuit diagram, code, and results, 
+              <h3>Project Report</h3>
+              For a detailed explanation of the project, including the circuit diagram, code, and results,
               please refer to the project report linked below.
             </p>
           </div>
-          <a
-            href={project.reportLink.replace(/"/g, '')} // Remove extra quotes
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn2"
-          >
-            View Project Report
-          </a>
         </div>
-      ))}
-      <Link to="/" className="btn btn2">Back to Home</Link>
+        <a
+          href={project.reportLink.replace(/"/g, '')}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn btn2"
+        >
+          View Project Report
+        </a>
+
+        <Link to="/" className="btn btn2">Back to Home</Link>
+      </div>
     </div>
   );
 };

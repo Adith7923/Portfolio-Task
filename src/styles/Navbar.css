@@ -13,8 +13,8 @@ nav {
 }
 
 .project-navbar {
-  background-color: white; /* White background for project pages */
-  background-image: none;  /* Remove gradient for project pages */
+  background-color: white; 
+  background-image: none;  
 }
 
 .logo {
@@ -61,28 +61,28 @@ nav ul li a:hover::after {
   font-size: 30px;
   display: none;
   cursor: pointer;
-  transition: transform 0.3s ease; /* Smooth rotation transition */
+  transition: transform 0.3s ease; 
 }
 
 @media (max-width: 768px) {
 
   nav ul {
-    display: flex; /* Make it visible by default */
+    display: flex;
     flex-direction: column;
     width: 100%;
     background-image: linear-gradient(to left, #68a098, #fff);
     position: fixed;
-    top: -100%; /* Initially position it off-screen at the top */
+    top: -100%; 
     left: 0; 
     padding: 20px 0;
     border-radius: 5px;
-    opacity: 0; /* Start with opacity 0 (hidden) */
-    transition: transform 0.5s ease, opacity 0.3s ease; /* Add transition for sliding and fading */
+    opacity: 0; 
+    transition: transform 0.5s ease, opacity 0.3s ease; 
   }
 
   nav ul.active {
-    top: 85px; /* Position it below the navbar */
-    opacity: 1; /* Make it visible */
+    top: 85px; 
+    opacity: 1;
   }
 
   nav ul li {
@@ -101,6 +101,6 @@ nav ul li a:hover::after {
   }
 
   .icon.rotate {
-    transform: rotate(90deg); /* Rotate the icon */
+    transform: rotate(90deg); 
   }
 }

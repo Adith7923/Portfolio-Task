@@ -33,6 +33,7 @@ import project4 from "./assets/images/FPGA.png";
 import ScrollToTop from "./components/ScrollToTop";
 import Navbar from "./components/Navbar";
 import { Helmet } from "react-helmet";
+import ProjectDetails from "./pages/Project";
 import {
   faPython,
   faHtml5,
@@ -58,7 +59,36 @@ const App = () => {
   const opentab = (tabname) => {
     setActiveTab(tabname);
   };
-
+  const About = () => {
+    const [activeTab, setActiveTab] = useState('skills');
+  
+    const [skills, setSkills] = useState([]);
+    const [experience, setExperience] = useState([]);
+    const [education, setEducation] = useState([]);
+  
+    useEffect(() => {
+      // Fetch dynamic data (replace with your actual API calls)
+      const fetchData = async () => {
+        try {
+          // Example fetch requests - replace with actual API endpoints
+          const skillsResponse = await fetch('/api/skills');
+          const experienceResponse = await fetch('/api/experiences');
+          const educationResponse = await fetch('/api/education');
+  
+          const skillsData = await skillsResponse.json();
+          const experienceData = await experienceResponse.json();
+          const educationData = await educationResponse.json();
+  
+          setSkills(skillsData);
+          setExperience(experienceData);
+          setEducation(educationData);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+  
+      fetchData();
+    }, []);}
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -154,6 +184,8 @@ encryptedClassName="encrypted"
         <Route path="/project2" element={<Project2 />} />
         <Route path="/project3" element={<Project3 />} />
         <Route path="/project4" element={<Project4 />} />
+        <Route path="/projects/:id" element={<ProjectDetails />} />
+
         <Route
           path="/"
           element={
@@ -360,8 +392,9 @@ encryptedClassName="encrypted"
                   </div>
                 </div>
               </div>
-
+             
               {/* Projects Section */}
+            
               <div id="services">
                 <div className="container">
                   <h1 className="sub-title">My Projects</h1>
@@ -371,7 +404,7 @@ encryptedClassName="encrypted"
                       <div className="layer">
                         <h3>Light Follower Robot</h3>
                         <p>This robot follows the direction of light</p>
-                        <Link to="/project1">
+                        <Link to="/projects/1">
                           <FontAwesomeIcon icon={faUpRightFromSquare} />
                         </Link>
                       </div>
@@ -384,7 +417,7 @@ encryptedClassName="encrypted"
                           A traffic sign detection system using CNN and Keras in
                           Python
                         </p>
-                        <Link to="/project2">
+                        <Link to="/projects/2">
                           <FontAwesomeIcon icon={faUpRightFromSquare} />
                         </Link>
                       </div>
@@ -400,7 +433,7 @@ encryptedClassName="encrypted"
                           This device helps in continuous monitoring of
                           pollution in vehicles
                         </p>
-                        <Link to="/project3">
+                        <Link to="/projects/3">
                           <FontAwesomeIcon icon={faUpRightFromSquare} />
                         </Link>
                       </div>
@@ -413,7 +446,7 @@ encryptedClassName="encrypted"
                           Implements Gaussian Minimum Shift Keying modulation
                           and demodulation using FPGA
                         </p>
-                        <Link to="/project4">
+                        <Link to="/projects/4">
                           <FontAwesomeIcon icon={faUpRightFromSquare} />
                         </Link>
                       </div>

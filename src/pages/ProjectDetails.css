@@ -12,6 +12,18 @@ body {
   color: #080808;
 }
 
+/* Slide-up animation */
+.project-details-wrapper {
+  opacity: 0;
+  transform: translateY(100px); /* Start from below */
+  transition: all 0.5s ease-in-out; /* Smooth transition */
+}
+
+.project-details-wrapper.slide-up {
+  opacity: 1;
+  transform: translateY(0); /* Slide up to its position */
+}
+
 .project-details {
   background: linear-gradient(to bottom, #f8f9fa, #68a098);
   display: flex;
@@ -73,12 +85,12 @@ body {
   border-radius: 5px;
   text-decoration: none;
   transition: background 0.3s;
+  font-weight: bold;
 }
 
 .project-details a.btn:hover {
   background: #5a8a7f;
   color: #ffffff;
-  font-weight: bold;
 }
 
 .ImgDet {
@@ -102,21 +114,20 @@ body {
   overflow: hidden;
 }
 
-.desc{
+.desc {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   gap: 150px;
   text-align: center;
   margin: auto;
-  
 }
 
-.report{
+.report {
   margin-top: 20px;
   display: flex;
-  justify-content: center;  
-  text-align: justify;
+  justify-content: center; /* Center horizontally */
+  text-align: center;
 }
 
 .paper-plane {
@@ -126,78 +137,80 @@ body {
   transform: translateX(0);
   transition: transform 0.3s ease;
 }
+
 .paper-plane:hover {
   fill: #ffffff;
   color: #ffffff;
-
 }
+
 .send-button:hover .paper-plane {
   transform: translateX(10px);
   transition: transform 0.3s ease;
-  background-color: #68a098 ;
+  background-color: #68a098;
   fill: #ffffff;
 }
 
-
 @media (max-width: 768px) {
   .ImgDet {
-    flex-direction: column; 
-    align-items: center; 
+    flex-direction: column;
+    align-items: center;
   }
 
   .project-details {
     padding: 10px;
     text-align: justify;
   }
-.project-details p{
-  width: 400px;
-}
+
+  .project-details p {
+    width: 400px;
+  }
+
   .project-details h1 {
-    font-size: 36px; /* Reduce h1 font size */
-    margin-top: 150px; /* Adjust spacing for smaller screens */
+    font-size: 36px;
+    margin-top: 150px;
     margin-bottom: 15px;
     text-align: center;
   }
 
   .project-details h3 {
-    font-size: 20px; /* Adjust h3 font size */
-    text-align: center; /* Center-align h3 */
+    font-size: 20px;
+    text-align: center;
   }
 
   .project-details p {
-    font-size: 16px; /* Adjust paragraph font size */
+    font-size: 16px;
   }
 
   .project-details ul {
-    padding-left: 10px; /* Adjust list indentation */
+    padding-left: 10px;
   }
 
   .project-details ul li {
-    font-size: 16px; /* Adjust list item font size */
+    font-size: 16px;
   }
 
   .project-details img.project-image {
-    width: 80%; /* Ensure image scales appropriately */
-    margin: 20px 0; /* Add consistent spacing */
-    display: block; /* Center image */
+    width: 80%;
+    margin: 20px 0;
+    display: block;
   }
 
   .desc {
-    flex-direction: column; 
-    text-align: center; 
+    flex-direction: column;
+    text-align: center;
     gap: 20px;
-    width: 400px; /* Reduce gap between elements */
+    width: 400px;
   }
 
   .report {
     margin-top: 10px;
-    margin: 0 auto; /* Center-align report div */
-    text-align: center; 
+    margin: 0 auto;
+    text-align: center;
     width: 400px;
   }
 
   .project-details a.btn {
-    font-size: 14px; /* Smaller button font size */
-    padding: 8px 16px; /* Adjust button padding */
+    font-size: 14px;
+    padding: 8px 16px;
   }
 }
