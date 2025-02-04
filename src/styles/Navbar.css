@@ -9,12 +9,12 @@ nav {
   width: 100%;
   background-image: linear-gradient(to left, #68a098, #fff);
   z-index: 1000;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .project-navbar {
-  background-color: white; 
-  background-image: none;  
+  background-color: white;
+  background-image: none;
 }
 
 .logo {
@@ -39,6 +39,7 @@ nav ul li a {
   font-size: 18px;
   position: relative;
   font-weight: 700;
+  cursor: pointer;
 }
 
 nav ul li a::after {
@@ -55,17 +56,24 @@ nav ul li a::after {
 nav ul li a:hover::after {
   width: 100%;
 }
+.navbar ul li .active-link {
+  color: #000000; /* Highlight color for active link */
+  font-weight: bold;
+  font-family: 'League Spartan', sans-serif;
+  font-size: 25px;
+}
 
 .icon {
   color: #fff;
   font-size: 30px;
   display: none;
   cursor: pointer;
-  transition: transform 0.3s ease; 
+  transition: transform 0.3s ease;
+
 }
 
-@media (max-width: 768px) {
 
+@media (max-width: 768px) {
   nav ul {
     display: flex;
     flex-direction: column;
@@ -76,13 +84,25 @@ nav ul li a:hover::after {
     left: 0; 
     padding: 20px 0;
     border-radius: 5px;
-    opacity: 0; 
-    transition: transform 0.5s ease, opacity 0.3s ease; 
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.3s ease;
   }
 
   nav ul.active {
-    top: 85px; 
+    top: 85px;
     opacity: 1;
+  }
+
+  /* Default nav-link style */
+  .nav-link {
+    text-decoration: none;
+    color: #000; /* or your preferred color */
+    padding: 8px 16px;
+  }
+
+  .nav-link.active-link {
+    text-decoration: underline;
+    font-weight: bold; /* Optional for a stronger effect */
   }
 
   nav ul li {
@@ -101,6 +121,12 @@ nav ul li a:hover::after {
   }
 
   .icon.rotate {
-    transform: rotate(90deg); 
+    transform: rotate(90deg);
+  }
+
+  /* Underline active link on mobile */
+  nav ul li a.active-link {
+    text-decoration: underline;
+    font-weight: bold; /* Make the active link bold */
   }
 }

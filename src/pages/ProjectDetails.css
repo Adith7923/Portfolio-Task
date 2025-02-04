@@ -99,7 +99,21 @@ body {
   align-items: center;
   flex-direction: row;
 }
+.project-details-wrapper {
+  opacity: 0;
+  transform: translateY(100px);
+  transition: opacity 0.5s, transform 0.5s;
+}
 
+.project-details-wrapper.slide-up {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ImgDet p{
+  text-align: justify;
+  margin-right: 80px;
+}
 .send-button {
   display: inline-flex;
   align-items: center;
@@ -155,7 +169,14 @@ body {
     flex-direction: column;
     align-items: center;
   }
-
+  .ImgDet img{
+    height: 750px;
+  }
+.ImgDet p{
+  margin-top: 15px;
+  margin:20px auto;
+ 
+}
   .project-details {
     padding: 10px;
     text-align: justify;
@@ -212,5 +233,75 @@ body {
   .project-details a.btn {
     font-size: 14px;
     padding: 8px 16px;
+  }
+}
+@media (max-width: 480px) {
+  .ImgDet {
+    flex-direction: column;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: justify;
+  }
+  .ImgDet img{
+    height: 550px;
+  }
+
+  .ImgDet p{
+   margin: 20px auto;
+   padding: 0 30px;
+  }
+
+  .project-details {
+    padding: 8px;
+    text-align: center; /* Better text alignment for smaller screens */
+  }
+
+  .project-details p {
+    width: 100%;
+    font-size: 14px; /* Adjust text size for smaller screens */
+  }
+
+  .project-details h1 {
+    font-size: 28px;
+    margin-top: 100px;
+    margin-bottom: 10px;
+  }
+
+  .project-details h3 {
+    font-size: 18px;
+  }
+
+  .project-details ul {
+    padding-left: 0; /* No padding for small screens */
+  }
+
+  .project-details ul li {
+    font-size: 14px;
+  }
+
+  .project-details img.project-image {
+    width: 90%; /* Make image slightly larger for smaller screens */
+    margin: 15px 0;
+  }
+
+  .desc {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+
+    width: 80%; /* Full width for better use of space */
+  }
+
+  .report {
+    margin-top: 10px;
+    margin: 0 auto;
+    text-align: center;
+    width: 90%; /* Adjust width for better mobile layout */
+  }
+
+  .project-details a.btn {
+    font-size: 12px; /* Reduce font size for buttons */
+    padding: 6px 12px; /* Smaller padding for buttons */
   }
 }

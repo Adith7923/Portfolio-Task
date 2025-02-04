@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPython,
@@ -6,21 +6,63 @@ import {
   faCss3Alt,
   faJsSquare,
   faJava,
-  faVideo,
-  faMicrochip,
+} from "@fortawesome/free-brands-svg-icons";
+import {
   faBriefcase,
   faGraduationCap,
-  faSchool,
-  faBook,
+  faCogs,
+  faCheck,
+  faLightbulb
 } from "@fortawesome/free-solid-svg-icons";
 import aboutImage from "../assets/images/IMG_20230906_132227 (1).png";
-import "../styles/Portfolio.css";
+import SkillIconCarousel from "./SkillIconCarousel";
+/* Slick Carousel styles */
+
+
+
 const About = () => {
   const [activeTab, setActiveTab] = useState("skills");
+  const [skills, setSkills] = useState([]);
+  const [experience, setExperience] = useState([]);
+  const [education, setEducation] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const opentab = (tabname) => {
-    setActiveTab(tabname);
-  };
+  // Fetch data from the backend
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+
+        const skillsResponse = await fetch("http://localhost:8080/api/skills");
+        const experienceResponse = await fetch("http://localhost:8080/api/experience");
+        const educationResponse = await fetch("http://localhost:8080/api/education");
+        console.log(skillsResponse);
+
+        if (!skillsResponse.ok || !experienceResponse.ok || !educationResponse.ok) {
+          throw new Error("Failed to fetch data.");
+        }
+
+        const skillsData = await skillsResponse.json();
+        const experienceData = await experienceResponse.json();
+        const educationData = await educationResponse.json();
+        // console.log(skillsData);
+        
+
+        setSkills(skillsData);
+        console.log("fetch skill:",skills);
+        setExperience(experienceData);
+        setEducation(educationData);
+        
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div id="about">
@@ -30,150 +72,98 @@ const About = () => {
             <img src={aboutImage} alt="About" />
           </div>
           <div className="about-col-2">
-            <h1 className="sub-title">About me</h1>
+            <h1 className="sub-title">About Me</h1>
             <p className="about-text">
               Passionate Software Developer with a strong foundation in coding
               and problem-solving. Focused on creating innovative solutions and
               pushing the boundaries of technology. Eager to contribute to
-              dynamic environments, constantly learning, and applying new skills
-              to solve complex challenges.
+              dynamic environments, constantly learning, and applying new
+              skills to solve complex challenges.
             </p>
             <div className="tab-titles">
               <p
-                className={`tab-links ${
-                  activeTab === "skills" ? "active-link" : ""
-                }`}
-                onClick={() => opentab("skills")}
+                className={`tab-links ${activeTab === "skills" ? "active-link" : ""}`}
+                onClick={() => setActiveTab("skills")}
               >
                 Skills
               </p>
               <p
-                className={`tab-links ${
-                  activeTab === "experience" ? "active-link" : ""
-                }`}
-                onClick={() => opentab("experience")}
+                className={`tab-links ${activeTab === "experience" ? "active-link" : ""}`}
+                onClick={() => setActiveTab("experience")}
               >
                 Experience
               </p>
               <p
-                className={`tab-links ${
-                  activeTab === "education" ? "active-link" : ""
-                }`}
-                onClick={() => opentab("education")}
+                className={`tab-links ${activeTab === "education" ? "active-link" : ""}`}
+                onClick={() => setActiveTab("education")}
               >
                 Education
               </p>
             </div>
-            <div
-              className={`tab-contents ${
-                activeTab === "skills" ? "active-tab" : ""
-              }`}
-              id="skills"
-            >
-              <ul>
-                <li>
-                  <span>
-                    <FontAwesomeIcon icon={faPython} className="skill-icon" />{" "}
-                    Programming Languages
-                  </span>
-                  <br />
-                  <br />
-                  <FontAwesomeIcon icon={faPython} className="skill-icon" />{" "}
-                  Python ,{" "}
-                  <FontAwesomeIcon icon={faHtml5} className="skill-icon" /> HTML
-                  ,{" "}
-                  <FontAwesomeIcon icon={faCss3Alt} className="skill-icon" />{" "}
-                  CSS ,{" "}
-                  <FontAwesomeIcon icon={faJsSquare} className="skill-icon" />{" "}
-                  JavaScript , C ,{" "}
-                  <FontAwesomeIcon icon={faJava} className="skill-icon" /> Java
-                </li>
-                <li>
-                  <FontAwesomeIcon icon={faVideo} className="skill-icon" />
-                  <span>Video Editing</span>
-                  <br />
-                  <br />
-                  Proficient in Adobe Premiere Pro, After Effects, Wondershare
-                  Filmora
-                </li>
-                <li>
-                  <FontAwesomeIcon icon={faMicrochip} className="skill-icon" />
-                  <span>Electronics</span>
-                  <br />
-                  <br />
-                  Basic knowledge of Raspberry Pi, Verilog
-                </li>
-              </ul>
-            </div>
+            <div className="tab-contents">
 
-            <div
-              className={`tab-contents ${
-                activeTab === "experience" ? "active-tab" : ""
-              }`}
-              id="experience"
-            >
-              <ul>
-                <li>
-                  <span>
-                    <FontAwesomeIcon icon={faBriefcase} className="exp-icon" />
-                    Project Intern (November 2023 - February 2024)
-                  </span>
-                  <br />
-                  <br />
-                  Vikram Sarabhai Space Centre
-                </li>
-                <li>
-                  <FontAwesomeIcon icon={faBriefcase} className="exp-icon" />
-                  <span>Intern (June 2023 - July 2023)</span>
-                  <br />
-                  <br />
-                  Vikram Sarabhai Space Centre
-                </li>
-                <li>
-                  <FontAwesomeIcon icon={faVideo} className="skill-icon" />
-                  <span>Video Editor (2022-23)</span>
-                  <br />
-                  <br />
-                  IEEE ComSoc Kerala Chapter
-                </li>
-              </ul>
-            </div>
-            <div
-              className={`tab-contents ${
-                activeTab === "education" ? "active-tab" : ""
-              }`}
-              id="education"
-            >
-              <ul>
-                <li>
-                  <FontAwesomeIcon
-                    icon={faGraduationCap}
-                    className="exp-icon"
-                  />
-                  <span>
-                    NSS College of Engineering Palakkad (2020-2024)
-                  </span>
-                  <br />
-                  <br />
-                  B.Tech. in Electronics and Communication Engineering
-                  <br />
-                  Minor degree in Python and Machine Learning (CSE Dept.)
-                </li>
-                <li>
-                  <FontAwesomeIcon icon={faSchool} className="exp-icon" />
-                  <span>MNKMHSS PULAPATTA (2018-2020)</span>
-                  <br />
-                  <br />
-                  Higher Secondary - Biology Science
-                </li>
-                <li>
-                  <FontAwesomeIcon icon={faBook} className="exp-icon" />
-                  <span>H S KATAMPAZHIPURAM (2018)</span>
-                  <br />
-                  <br />
-                  Matriculation
-                </li>
-              </ul>
+              {loading ? (
+                <p>Loading...</p>
+              ) : error ? (
+                <p className="error-message">{error}</p>
+              ) 
+              : (
+                <>
+                  {activeTab === "skills" && (
+                    <ul>
+                      {skills.map((skill, index) =>{
+                      console.log(skill.category)
+                      console.log(skill.name)
+                        return (
+                        <li key={index}>
+                          <span>
+                            <FontAwesomeIcon icon={faLightbulb} className="skill-icon" />
+                            {skill.category}
+                          </span>
+                          <br />
+                          <br />
+                            {skill.name}
+                        </li>
+                      )})}
+                    </ul>
+                  )}
+
+                  {activeTab === "experience" && (
+                    <ul>
+                      {experience.map((exp, index) => (
+                        <li key={index}>
+                          <FontAwesomeIcon icon={faBriefcase} className="exp-icon" />
+                          <span>
+                            {exp.title} ({exp.duration})
+                          </span>
+                          <br />
+                          <br />
+                          {exp.company}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+
+                  {activeTab === "education" && (
+                    <ul>
+                      {education.map((edu, index) => (
+                        <li key={index}>
+                          <FontAwesomeIcon
+                            icon={faGraduationCap}
+                            className="edu-icon"
+                          />
+                          <span>
+                              {edu.institution} ({edu.duration})
+                          </span>
+                          <br />
+                          <br />
+                          {edu.degree}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </>
+              )}
             </div>
           </div>
         </div>

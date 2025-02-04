@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -16,6 +16,7 @@ import {
   faInstagramSquare,
   faLinkedin,
   faGithub,
+  faXTwitter
 } from "@fortawesome/free-brands-svg-icons";
 import Project1 from "./pages/Project1";
 import Project2 from "./pages/Project2";
@@ -44,8 +45,10 @@ import {
 import { faMicrochip, faVideo } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import DecryptedText from "./blocks/TextAnimations/DecryptedText/DecryptedText";
-import { Player } from '@lottiefiles/react-lottie-player';
+import { Player } from "@lottiefiles/react-lottie-player";
 import Header from "./components/Header";
+import About from "./components/About";
+import SkillIconCarousel from "./components/SkillIconCarousel";
 const App = () => {
   const [activeTab, setActiveTab] = useState("skills");
   const [formData, setFormData] = useState({
@@ -55,40 +58,11 @@ const App = () => {
   });
   const [formErrors, setFormErrors] = useState({});
   const [formSuccess, setFormSuccess] = useState("");
-
+  const [projects, setProjects] = useState([]);
   const opentab = (tabname) => {
     setActiveTab(tabname);
   };
-  const About = () => {
-    const [activeTab, setActiveTab] = useState('skills');
-  
-    const [skills, setSkills] = useState([]);
-    const [experience, setExperience] = useState([]);
-    const [education, setEducation] = useState([]);
-  
-    useEffect(() => {
-      // Fetch dynamic data (replace with your actual API calls)
-      const fetchData = async () => {
-        try {
-          // Example fetch requests - replace with actual API endpoints
-          const skillsResponse = await fetch('/api/skills');
-          const experienceResponse = await fetch('/api/experiences');
-          const educationResponse = await fetch('/api/education');
-  
-          const skillsData = await skillsResponse.json();
-          const experienceData = await experienceResponse.json();
-          const educationData = await educationResponse.json();
-  
-          setSkills(skillsData);
-          setExperience(experienceData);
-          setEducation(educationData);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
-      };
-  
-      fetchData();
-    }, []);}
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -135,32 +109,32 @@ const App = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-        const ContactMessageData = {
-        name: formData.name,
-        email: formData.email,
-        message: formData.message,
-      };
+    const ContactMessageData = {
+      name: formData.name,
+      email: formData.email,
+      message: formData.message,
+    };
 
-      axios
-    .post('http://localhost:8080/api/contact', ContactMessageData )
-    .then((response) => {
-      setName("");
-      setEmail("");
-      setMessage("");
-    })
+    axios
+      .post("http://localhost:8080/api/contact", ContactMessageData)
+      .then((response) => {
+        setName("");
+        setEmail("");
+        setMessage("");
+      });
     const errors = validateForm();
     if (Object.keys(errors).length === 0) {
       console.log("Form Data Submitted:", formData);
       setFormSuccess(
         <DecryptedText
-text="Thank you! I will reach out to you soon."
-speed={100}
-maxIterations={20}
-characters="ABCD1234!?"
-className="revealed"
-parentClassName="all-letters"
-encryptedClassName="encrypted"
-/>
+          text="Thank you! I will reach out to you soon."
+          speed={100}
+          maxIterations={20}
+          characters="ABCD1234!?"
+          className="revealed"
+          parentClassName="all-letters"
+          encryptedClassName="encrypted"
+        />
       );
       setFormData({ name: "", email: "", message: "" });
       setFormErrors({});
@@ -168,9 +142,13 @@ encryptedClassName="encrypted"
       setFormErrors(errors);
       setFormSuccess("");
     }
-    
   };
-
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/api/projects")
+      .then((response) => setProjects(response.data))
+      .catch((error) => console.error("Error fetching projects:", error));
+  }, []);
   return (
     <Router>
       <Helmet>
@@ -179,7 +157,6 @@ encryptedClassName="encrypted"
       <ScrollToTop />
       <Navbar />
       <Routes>
-        
         <Route path="/project1" element={<Project1 />} />
         <Route path="/project2" element={<Project2 />} />
         <Route path="/project3" element={<Project3 />} />
@@ -194,272 +171,41 @@ encryptedClassName="encrypted"
               <Header />
 
               {/* About Section */}
-              <div id="about">
-                <div className="container">
-                  <div className="row">
-                    <div className="about-col-1">
-                      <img src={aboutImage} alt="About" />
-                    </div>
-                    <div className="about-col-2">
-                      <h1 className="sub-title">About me</h1>
-                      <p className="about-text">
-                        Passionate Software Developer with a strong foundation
-                        in coding and problem-solving. Focused on creating
-                        innovative solutions and pushing the boundaries of
-                        technology. Eager to contribute to dynamic environments,
-                        constantly learning, and applying new skills to solve
-                        complex challenges.
-                      </p>
-                      <div className="tab-titles">
-                        <p
-                          className={`tab-links ${
-                            activeTab === "skills" ? "active-link" : ""
-                          }`}
-                          onClick={() => opentab("skills")}
-                        >
-                          Skills
-                        </p>
-                        <p
-                          className={`tab-links ${
-                            activeTab === "experience" ? "active-link" : ""
-                          }`}
-                          onClick={() => opentab("experience")}
-                        >
-                          Experience
-                        </p>
-                        <p
-                          className={`tab-links ${
-                            activeTab === "education" ? "active-link" : ""
-                          }`}
-                          onClick={() => opentab("education")}
-                        >
-                          Education
-                        </p>
-                      </div>
-                      <div
-                        className={`tab-contents ${
-                          activeTab === "skills" ? "active-tab" : ""
-                        }`}
-                        id="skills"
-                      >
-                        <ul>
-                          <li>
-                            <span>
-                              <FontAwesomeIcon
-                                icon={faPython}
-                                className="skill-icon"
-                              />{" "}
-                              Programming Languages
-                            </span>
-                            <br />
-                            <br />
-                            <FontAwesomeIcon
-                              icon={faPython}
-                              className="skill-icon"
-                            />{" "}
-                            Python ,{" "}
-                            <FontAwesomeIcon
-                              icon={faHtml5}
-                              className="skill-icon"
-                            />{" "}
-                            HTML ,{" "}
-                            <FontAwesomeIcon
-                              icon={faCss3Alt}
-                              className="skill-icon"
-                            />{" "}
-                            CSS ,{" "}
-                            <FontAwesomeIcon
-                              icon={faJsSquare}
-                              className="skill-icon"
-                            />{" "}
-                            JavaScript , C ,{" "}
-                            <FontAwesomeIcon
-                              icon={faJava}
-                              className="skill-icon"
-                            />{" "}
-                            Java
-                          </li>
-                          <li>
-                            <FontAwesomeIcon
-                              icon={faVideo}
-                              className="skill-icon"
-                            />
-                            <span>Video Editing</span>
-                            <br />
-                            <br />
-                            Proficient in Adobe Premiere Pro, After Effects,
-                            Wondershare Filmora
-                          </li>
-                          <li>
-                            <FontAwesomeIcon
-                              icon={faMicrochip}
-                              className="skill-icon"
-                            />
-                            <span>Electronics</span>
-                            <br />
-                            <br />
-                            Basic knowledge of Raspberry Pi, Verilog
-                          </li>
-                        </ul>
-                      </div>
+              <About />
 
-                      <div
-                        className={`tab-contents ${
-                          activeTab === "experience" ? "active-tab" : ""
-                        }`}
-                        id="experience"
-                      >
-                        <ul>
-                          <li>
-                            <span>
-                            <FontAwesomeIcon
-                              icon={faBriefcase}
-                              className="exp-icon"
-                            />
-                            Project Intern (November 2023 - February 2024)
-                            </span>
-                            <br />
-                            <br />
-                            Vikram Sarabhai Space Centre
-                          </li>
-                          <li>
-                            <FontAwesomeIcon
-                              icon={faBriefcase}
-                              className="exp-icon"
-                            />
-                            <span>Intern (June 2023 - July 2023)</span>
-                            <br />
-                            <br />
-                            Vikram Sarabhai Space Centre
-                          </li>
-                          <li>
-                          <FontAwesomeIcon
-                              icon={faVideo}
-                              className="skill-icon"
-                            />
-                            <span>Video Editor (2022-23)</span>
-                            <br />
-                            <br />
-                            IEEE ComSoc Kerala Chapter
-                          </li>
-                        </ul>
-                      </div>
-                      <div
-                        className={`tab-contents ${
-                          activeTab === "education" ? "active-tab" : ""
-                        }`}
-                        id="education"
-                      >
-                        <ul>
-                          <li>
-                          <FontAwesomeIcon
-                              icon={faGraduationCap}
-                              className="exp-icon"
-                            />
-                            <span>
-                              NSS College of Engineering Palakkad (2020-2024)
-                            </span>
-                            <br />
-                            <br />
-                            B.Tech. in Electronics and Communication Engineering
-                            <br />
-                            Minor degree in Python and Machine Learning (CSE
-                            Dept.)
-                          </li>
-                          <li>
-                          <FontAwesomeIcon
-                              icon={faSchool}
-                              className="exp-icon"
-                            />
-                            <span>MNKMHSS PULAPATTA (2018-2020)</span>
-                            <br />
-                            <br />
-                            Higher Secondary - Biology Science
-                          </li>
-                          <li>
-                          <FontAwesomeIcon
-                              icon={faBook}
-                              className="exp-icon"
-                            />
-                            <span>H S KATAMPAZHIPURAM (2018)</span>
-                            <br />
-                            <br />
-                            Matriculation
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-             
               {/* Projects Section */}
-            
+
               <div id="services">
-                <div className="container">
-                  <h1 className="sub-title">My Projects</h1>
-                  <div className="projects-list">
-                    <div className="work">
-                      <img src={project1} alt="Light Follower Robot" />
-                      <div className="layer">
-                        <h3>Light Follower Robot</h3>
-                        <p>This robot follows the direction of light</p>
-                        <Link to="/projects/1">
-                          <FontAwesomeIcon icon={faUpRightFromSquare} />
-                        </Link>
-                      </div>
-                    </div>
-                    <div className="work">
-                      <img src={project2} alt="Traffic Sign Detector" />
-                      <div className="layer">
-                        <h3>Traffic Sign Detector</h3>
-                        <p>
-                          A traffic sign detection system using CNN and Keras in
-                          Python
-                        </p>
-                        <Link to="/projects/2">
-                          <FontAwesomeIcon icon={faUpRightFromSquare} />
-                        </Link>
-                      </div>
-                    </div>
-                    <div className="work">
-                      <img
-                        src={project3}
-                        center    alt="Vehicular Pollution Monitoring System"
-                      />
-                      <div className="layer">
-                        <h3>Vehicular Pollution Monitoring System</h3>
-                        <p>
-                          This device helps in continuous monitoring of
-                          pollution in vehicles
-                        </p>
-                        <Link to="/projects/3">
-                          <FontAwesomeIcon icon={faUpRightFromSquare} />
-                        </Link>
-                      </div>
-                    </div>
-                    <div className="work">
-                      <img src={project4} alt="FPGA" />
-                      <div className="layer">
-                        <h3>FPGA Based GMSK Modulator and Demodulator</h3>
-                        <p>
-                          Implements Gaussian Minimum Shift Keying modulation
-                          and demodulation using FPGA
-                        </p>
-                        <Link to="/projects/4">
-                          <FontAwesomeIcon icon={faUpRightFromSquare} />
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                  <a
-                    href="https://drive.google.com/drive/u/2/folders/1WDNnB4EkQ_xZGUBaVyfYpHF1dkFZ2t2X"
-                    className="btn"
-                  >
-                    See more
-                  </a>
-                </div>
-              </div>
+  <div className="container">
+    <h1 className="sub-title">My Projects</h1>
+    <div className="projects-list">
+      {projects.map((project, index) => (
+        project && (
+          <div className="work" key={index}>
+            <img
+              src={`data:image/png;base64,${project.displayImage}`}
+              alt={project.title}
+            />
+            <div className="layer">
+              <h3>{project.title}</h3>
+              <p>{project.extraDescription}</p>
+              <Link to={`/projects/${index}`}>
+                <FontAwesomeIcon icon={faUpRightFromSquare} />
+              </Link>
+            </div>
+          </div>
+        )
+      ))}
+    </div>
+    <a
+      href="https://drive.google.com/drive/u/2/folders/1WDNnB4EkQ_xZGUBaVyfYpHF1dkFZ2t2X"
+      className="btn"
+    >
+      See more
+    </a>
+  </div>
+</div>
+
 
               {/* Contact Section */}
               <div id="contact">
@@ -468,19 +214,26 @@ encryptedClassName="encrypted"
                     <div className="contact-left">
                       <h1 className="sub-title">Contact Me</h1>
                       <p>
-  <a
-    href="mailto:adith7923@gmail.com"
-    style={{
-      textDecoration: "none",
-      color: "inherit",
-      transition: "color 0.3s ease",
-    }}
-    onMouseEnter={(e) => (e.target.style.color = "#68a098")}
-    onMouseLeave={(e) => (e.target.style.color = "inherit")}
-  >
-   <span><FontAwesomeIcon icon={faEnvelope} /> </span> adith7923@gmail.com
-  </a>
-</p>
+                        <a
+                          href="mailto:adith7923@gmail.com"
+                          style={{
+                            textDecoration: "none",
+                            color: "inherit",
+                            transition: "color 0.3s ease",
+                          }}
+                          onMouseEnter={(e) =>
+                            (e.target.style.color = "#68a098")
+                          }
+                          onMouseLeave={(e) =>
+                            (e.target.style.color = "inherit")
+                          }
+                        >
+                          <span>
+                            <FontAwesomeIcon icon={faEnvelope} />{" "}
+                          </span>{" "}
+                          adith7923@gmail.com
+                        </a>
+                      </p>
 
                       <p>
                         <FontAwesomeIcon icon={faPhone} /> 9947397099
@@ -490,7 +243,7 @@ encryptedClassName="encrypted"
                           <FontAwesomeIcon icon={faFacebook} />
                         </a>
                         <a href="https://twitter.com/AdithTM1">
-                          <FontAwesomeIcon icon={faTwitterSquare} />
+                          <FontAwesomeIcon icon={faXTwitter} />
                         </a>
                         <a href="https://www.instagram.com/adith.t.m/">
                           <FontAwesomeIcon icon={faInstagramSquare} />
@@ -516,7 +269,7 @@ encryptedClassName="encrypted"
                           <Form.Label>Your Name</Form.Label>
                           <Form.Control
                             type="text"
-                            placeholder="Your Name"
+                            placeholder="Enter your Name"
                             name="name"
                             value={formData.name}
                             onChange={handleChange}
@@ -576,19 +329,27 @@ encryptedClassName="encrypted"
                           )}
                         </Form.Group>
 
-                        <Button variant="primary" type="submit" className="send-button">
-  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-    <Player
-      autoplay
-      loop
-      src="/animations/Animation.json"
-      style={{ height: '30px', width: '80px' }}
-    />
-    <span>Connect with me!</span>
-  </div>
-</Button>
-
-
+                        <Button
+                          variant="primary"
+                          type="submit"
+                          className="send-button"
+                        >
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "column",
+                              alignItems: "center",
+                            }}
+                          >
+                            <Player
+                              autoplay
+                              loop
+                              src="/animations/Animation.json"
+                              style={{ height: "30px", width: "80px" }}
+                            />
+                            <span>Connect with me!</span>
+                          </div>
+                        </Button>
                       </Form>
                       {formSuccess && (
                         <div className="success-message">{formSuccess}</div>

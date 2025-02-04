@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import './ProjectDetails.css';
+import { motion } from 'framer-motion'; // Import framer-motion
 import ScrollToTop from '../components/ScrollToTop';
 
 const ProjectDetails = () => {
@@ -10,11 +11,11 @@ const ProjectDetails = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isAnimated, setIsAnimated] = useState(false); // For animation
-
+  
   useEffect(() => {
     const fetchProject = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/api/projects/id/${id}`);
+        const response = await fetch(`http://localhost:8080/api/projects/id/${parseInt(id) + 1}`);
         if (!response.ok) {
           throw new Error(`Project not found (status: ${response.status})`);
         }
@@ -34,6 +35,7 @@ const ProjectDetails = () => {
     if (!isLoading) {
       setIsAnimated(true); // Trigger the animation after the data is loaded
     }
+    console.log(id)
   }, [isLoading]);
 
   if (isLoading) {
@@ -60,7 +62,13 @@ const ProjectDetails = () => {
   }
 
   return (
-    <div className={`project-details-wrapper ${isAnimated ? 'slide-up' : ''}`}>
+    <motion.div
+      className={`project-details-wrapper ${isAnimated ? 'slide-up' : ''}`}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="project-details">
         <Helmet>
           <title>{project.title} - Project Details</title>
@@ -109,7 +117,7 @@ const ProjectDetails = () => {
 
         <Link to="/" className="btn btn2">Back to Home</Link>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
